@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" 
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<title>速習 Spring Boot</title>
+</head>
+<body>
+<table class="table">
+<thead>
+<tr>
+    <th>値</th><th>index</th><th>count</th><th>size</th>
+    <th>even</th><th>odd</th><th>first</th><th>last</th>
+</tr>
+</thead>
+<tbody>
+<tr th:each="week,status : ${weeks}">
+    <td>[[${status.current}]]</td>
+    <td>[[${status.index}]]</td>
+    <td>[[${status.count}]]</td>
+    <td>[[${status.size}]]</td>
+    <td>[[${status.even}]]</td>
+    <td>[[${status.odd}]]</td>
+    <td>[[${status.first}]]</td>
+    <td>[[${status.last}]]</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

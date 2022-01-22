@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="meta(title, scripts)">
+    <meta charset="UTF-8">
+    <title th:replace="${title}">速習 Spring Boot</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <th:block th:replace="${scripts}"></th:block>
+</head>
+<body>
+<div th:fragment="header">
+    <img src="https://wings.msn.to/image/wings.jpg" title="ロゴ" >
+    <hr>
+</div>
+<div th:fragment="footer">
+    <hr>
+    <p>Copyright(c) 2020,WINGS Project, All Right Reserved.</p>
+</div>
+</body>
+</html>

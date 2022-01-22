@@ -1,0 +1,74 @@
+<!-- ベーステンプレートを適用する -->
+{% extends 'base.html' %}
+<!--
+ 静的ファイルのURLを生成するstaticタグのロードは
+ 個々のページで行うことが必要
+ -->
+{% load static %}
+<!-- ヘッダー情報のページタイトルは
+  ベーステンプレートを利用するページで設定する -->
+{% block title %}Django's Blog{% endblock %}
+
+<!--
+  <!DOCTYPE html>以下、<head>～</head>まで
+  ベーステンプレートで設定済みなので削除
+-->
+
+  <!-- Navigation -->
+  <!-- <nav>～</nav>と<body>はベーステンプレートで設定済みなので削除 -->
+
+  <!-- Page Header -->
+  <!-- ページのヘッダーはベーステンプレートを使用するページで設定する -->
+  {% block header %}
+  <!-- ヘッダーの背景イメージのリンク先url()の引数をstaticタグに書き換え -->
+  <header class="masthead"
+          style="background-image: url({% static 'assets/img/post-bg.jpg' %})">
+    <div class="container position-relative px-4 px-lg-5">
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+          <div class="post-heading">
+            <!--
+            投稿記事のタイトル
+            <h1>タグの要素を書き換える
+            レコードをobjectで参照し、titleフィールドの値を出力
+            -->
+            <h1>{{object.title}}</h1>
+            <!--
+            サブタイトル
+            <h2>タグの要素を書き換える
+            レコードをobjectで参照し、contentフィールドの値を30文字以内で出力
+            -->
+            <h2 class="subheading">{{object.content|truncatechars:30}}</h2>
+            <span class="meta">
+            <!-- 投稿日時とカテゴリ -->
+            <!-- トップページにリンクする -->
+            <a href={% url 'blog:index' %}>Django's Blog</a>
+            <!-- 投稿日時を出力としてposted_atフィールドを出力 -->
+            {{object.posted_at}}に投稿／カテゴリ:
+            <!-- categoryフィールドを出力-->
+            {{object.category}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  {% endblock %}
+
+  <!-- Post Content -->
+  {% block contents %}
+  <article class="mb-4">
+    <div class="container px-4 px-lg-5">
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+        <!--
+        以下<div>タグの要素を書き換える
+        レコードをobjectで参照し、contentフィールドの値を出力
+        <p>～</p>の要素とすることで全体を1つの段落にする
+        -->
+        <div class="col-md-10 col-lg-8 col-xl-7">
+        　　<p>{{object.content}}</p>
+        </div>
+      </div>
+    </div>
+  </article>
+  <hr>
+  {% endblock %}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="main">
+<table class="table">
+<thead>
+<tr>
+    <th>ISBNコード</th><th>書名</th><th>価格</th><th>出版社</th><th>刊行日</th>
+</tr>
+</thead>
+<tbody th:each="b : ${page.content}">
+<tr>
+    <td>[[${b.isbn}]]</td>
+    <td>[[${b.title}]]</td>
+    <td>[[${#numbers.formatInteger(b.price, 3, 'COMMA')}]]円</td>
+    <td>[[${b.publisher}]]</td>
+    <td>[[${#temporals.format(b.published, 'yyyy年MM月dd日')}]]</td>
+</tr>
+</tbody>
+</table>
+<ul class="pagination">
+    <li class="page-item">
+        <a class="page-link" th:if="${!page.first}"
+             th:href="@{/record/paging(page=${page.number}-1)}">前</a>
+    </li>
+    <li class="page-item"    
+         th:each="i : ${#numbers.sequence(0, page.totalPages-1)}">
+         <a class="page-link" th:href="@{/record/paging(page=${i})}">
+         [[${i+1}]]</a>
+    </li>
+    <li class="page-item">
+         <a class="page-link" th:if="${!page.last}"
+             th:href="@{/record/paging(page=${page.number}+1)}">次</a>
+    </li>
+</ul>
+</div>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>速習 Spring Boot</title>
+</head>
+<body>
+<ul>
+    <li><a th:href="@{https://wings.msn.to}">絶対パス</a></li>
+    <li><a th:href="@{foo/bar}">相対パス（ページ）</a></li>
+    <li><a th:href="@{/foo/bar}">相対パス（コンテキスト）</a></li>
+    <li><a th:href="@{~/myapp2/hoge}">相対パス（サーバー）</a></li>
+</ul>
+</body>
+</html>

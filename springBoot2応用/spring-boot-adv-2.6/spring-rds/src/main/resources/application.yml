@@ -1,0 +1,28 @@
+# 共通環境
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  type-aliases-package: dev.itboot.mb.model
+spring:
+  sql:
+    init:
+      platform: h2
+server:
+  port: 5000
+
+---
+# 開発環境(dev)
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:postgresql://エンドポイント:5432/testdb
+    username: postgres
+    password: マスターパスワード
+  sql:
+    init:
+      mode: always
+      platform: postgresql
+server:
+  port: 9000

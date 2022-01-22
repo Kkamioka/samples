@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="main">
+<h3>「[[${book.title}]]」のレビュー</h3>
+<ul>
+    <li th:each="r : ${book.reviews}">
+        [[${r.body}]]（[[${r.name}]]）
+    </li>
+</ul>
+</div>
+</html>

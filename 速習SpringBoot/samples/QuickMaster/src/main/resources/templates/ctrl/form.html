@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="main">
+<form method="post" th:action="@{/ctrl/form}" th:object="${memberForm}">
+    <div>
+        <label for="name">名前：</label><br>
+        <!-- <input id="name" name="name" type="text"> -->
+        <input th:field="*{name}" type="text">
+        <!-- <input type="text" th:field="${memberForm.name}"> -->
+    </div>
+    <div>
+        <label for="birth">生年月日：</label><br>
+        <!-- <input id="birth" name="birth" type="date"> -->
+        <input th:field="*{birth}" type="date">
+    </div>
+    <div>
+        <label for="email">メールアドレス：</label><br>
+        <!-- <input id="email" name="email" type="email"> -->
+        <input th:field="*{email}" type="email">
+    </div>
+    <input type="submit" value="保存">
+</form>
+</div>
+</html>

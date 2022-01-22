@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>速習 Spring Boot</title>
+</head>
+<body>
+<th:block th:each="b: ${books}">
+    <header>[[${b.title}]]</header>
+    <div>価格：[[${b.price}]]円</div>
+    <footer>[[${b.publisher}]]</footer>
+</th:block>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" 
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<title>速習 Spring Boot</title>
+<style>
+.high  {
+     background-color: #FFC0CB
+}
+
+.low {
+    background-color: #7FFFD4
+} 
+</style>
+</head>
+<body>
+<table class="table">
+<thead>
+<tr>
+    <th>ISBNコード</th><th>書名</th><th>価格</th><th>出版社</th><th>刊行日</th>
+</tr>
+</thead>
+<tbody>
+<tr th:each="b : ${books}">
+    <td>[[${b.isbn}]]</td>
+    <td>[[${b.title}]]</td>
+<!--   <td>[[${#numbers.formatInteger(b.price, 3, 'COMMA')}]]円</td> -->
+    <td th:class="${b.price ge 3000} ? 'high' : 'low'">
+<!-- 	<td th:class="${b.price ge 3000} ? 'high' "> -->
+<!-- 	<td th:class="${b.price ge 3000} ? (${b.publisher eq '翔泳社'} ? 'sales': 'high') : 'low'"> -->
+         [[${#numbers.formatInteger(b.price, 3, 'COMMA')}]]円
+    </td>
+    <td>[[${b.publisher}]]</td>
+    <td>[[${#temporals.format(b.published, 'yyyy年MM月dd日')}]]</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

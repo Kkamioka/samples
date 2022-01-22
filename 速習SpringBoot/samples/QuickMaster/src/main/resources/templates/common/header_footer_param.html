@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>速習Spring Boot</title>
+</head>
+<body>
+<div th:fragment="header">
+    <img src="https://wings.msn.to/image/wings.jpg" title="ロゴ" >
+    <hr>
+</div>
+<div th:fragment="footer(name, published)">
+    <hr>
+    <p>Copyright(c) [[${published}]],[[${name}]], All Right Reserved.</p>
+</div>
+</body>
+</html>

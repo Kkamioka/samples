@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="main">
+<ul>
+    <li th:each="b : ${books}">[[${b.publisher}]]: [[${b.number}]]件</li>
+</ul>
+</div>
+</html>

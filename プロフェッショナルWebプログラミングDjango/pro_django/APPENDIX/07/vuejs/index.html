@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>掲示板</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/vue@3.0.0/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <h1>掲示板</h1>
+    <div id="app">
+        <div class="new-post">
+            <div class="new-post-item">
+                <input v-model.trim="postTitle" type="text" id="new-post-title" placeholder="タイトル" />
+            </div>
+            <div class="new-post-item">
+                <textarea v-model.trim="postContent" id="new-post-content" placeholder="本文"></textarea>
+            </div>
+
+            <div class="new-post-action">
+                <form id="form-post" @submit.prevent="createPost">
+                    <button type="submit" :disabled="!canCreatePost">作成</button>
+                </form>
+            </div>
+        </div>
+        <div>
+            <ul name="post-list" v-if="hasPosts" class="post-list">
+                <post-item v-for="(post, index) in resultPosts" :key="post.id" :post="post" v-model:done="post.done"></post-item>
+            </ul>
+            <p v-else>記事が有りません</p>
+        </div>
+    </div>
+    <script type="text/x-template" id="template-post-item">
+        <li class="post-item">
+            <div class="post-item-content">
+                <div class="post-item-date">{{ new Date(post.created_at).getFullYear() + "月" + (new Date(post.created_at).getMonth() + 1) + "月" + new Date(post.created_at).getDate() + "日"}}</div>
+                <h3 class="post-item-title">{{ post.title }}</h3>
+                <div v-if="post.content" class="post-item-content">
+                    {{ post.content }}
+                </div>
+            </div>
+        </li></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" 
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<title>速習 Spring Boot</title>
+</head>
+<body>
+<table class="table">
+<thead>
+<tr>
+    <th>ISBNコード</th><th>書名</th><th>価格</th><th>出版社</th><th>刊行日</th>
+</tr>
+</thead>
+<tbody>
+<tr th:each="b : ${books}">
+    <td>[[${b.isbn}]]</td>
+    <td>[[${b.title}]]</td>
+    <td>[[${#numbers.formatInteger(b.price, 3, 'COMMA')}]]円</td>
+    <td>[[${b.publisher}]]</td>
+    <td>[[${#temporals.format(b.published, 'yyyy年MM月dd日')}]]</td>
+    <td th:switch="${b.attach}">
+       <span th:case="'cd'">
+            <img th:src="@{/image/cd.png}" th:alt-title="${b.attach}">
+        </span>
+        <span th:case="'dvd'">
+             <img th:src="@{/image/dvd.png}" th:alt-title="${b.attach}">
+        </span>
+        <span th:case="'dl'">
+              <img th:src="@{/image/dl.png}" th:alt-title="${b.attach}">
+         </span>
+         <span th:case="*">
+             －
+          </span>
+    </td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

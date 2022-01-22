@@ -1,0 +1,21 @@
+# 共通環境
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  type-aliases-package: dev.itboot.mb.model
+server:
+  port: 5000
+
+---
+# 開発環境(dev)
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:mysql://確認したエンドポイント/ebdb
+    username: admin
+    password: 設定したパスワード
+  sql:
+    init:
+      mode: always

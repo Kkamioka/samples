@@ -1,0 +1,145 @@
+#2021-10-11 更新：Laravel6.xインストール不具合を解消！！
+
+<<動画解説>>
+https://youtu.be/ISiU3nCSgh0
+
+
+<<設定確認>>
+ 「Create environment」で新規作成する際に、
+ EC2 [ t2.micro ] デフォルト設定でOKです。
+ 
+ 
+
+ 
+#PHPセットアップ
+
+sudo amazon-linux-extras install php7.2=stable
+
+
+sudo yum install php-cli php-common php-devel php-fpm php-gd php-mysqlnd php-mbstring php-pdo php-xml
+
+
+# MaryaDB 構築
+
+sudo amazon-linux-extras install -y lamp-mariadb10.2-php7.2
+
+
+#MariaDBのインストール
+
+sudo yum install -y mariadb-server
+
+
+#Apache, MariaDBの起動
+sudo systemctl start mariadb
+
+sudo mysql_secure_installation
+
+
+#MaridaDBの自動起動を有効化
+
+sudo systemctl enable mariadb
+
+sudo systemctl is-enabled mariadb
+
+
+#Composerインストール
+
+curl -sS https://getcomposer.org/installer | php
+
+sudo mv composer.phar /usr/bin/composer
+
+composer
+
+
+#Laravelインストール
+
+composer create-project laravel/laravel cms 6.* --prefer-dist
+
+
+#ディレクトリ移動
+
+cd cms
+
+
+#Composerコマンド実行
+sudo composer update
+
+
+
+#**********************************************
+#  超大事！！！！！！！！！！！！！！！
+#  いつも使うので、覚えておくか直ぐコピペできる場所に書いておきましょう！
+#*********************************************
+
+#！！ [.env] 設定を変更したら必ずWebサーバーを再起動！！
+------
+#Webサーバー止める
+[ Ctl + C ]キーでWebサーバーを止めます。
+------
+#Webサーバー起動（.envの再読み込み！）
+php artisan serve --port=8080
+-------
+
+
+#4. [完了]Webサーバー起動確認***
+#4.1 Preview→ [Preview Running Application]選択
+#4.2 /resouces/views/welcome.blade.php を編集して見よう！
+#4.3 ブラウザ・更新で確認 →　変更確認できればOK
+
+
+
+
+################
+# ここでエラー! or 上手くいってないようだったら！！
+################
+
+sudo yum install php-cli php-common php-devel php-fpm php-gd php-mysqlnd php-mbstring php-pdo php-xml
+
+sudo composer update
+
+php artisan key:generate
+
+################
+#で解決するはず（私はこれで解決しました）
+################
+
+
+
+
+
+
+#.env（ファイル内の同じ箇所を上書き）
+DB_CONNECTION=mysql
+DB_HOST=localhost
+DB_PORT=3306
+DB_DATABASE=c9
+DB_USERNAME=root
+DB_PASSWORD=root
+
+
+
+
+#データベース「c9」を作成
+mysql -u root -p
+root [Enterキー]
+create database c9;
+exit;
+
+
+
+#重要事項：DBについて
+#こちらのAmazonLinux2で環境作った場合は
+#MariaDBは自動で起動するので毎回DBを起動する必要はありません。
+#※AmazonLinux AMI（旧AmazonLinux1）の場合は毎回CLOUD9起動時に必要です！
+
+
+
+
+
+
+
+
+
+
+
+

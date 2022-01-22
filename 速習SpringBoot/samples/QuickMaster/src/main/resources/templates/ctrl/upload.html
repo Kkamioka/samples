@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="main">
+<form enctype="multipart/form-data" method="POST"
+    th:action="@{/ctrl/upload}">
+    <input id="upfile" name="upfile" type="file">
+    <input type="submit" value="アップロード">
+</form>
+<p th:text="${success}"></p>
+</div>
+</html>

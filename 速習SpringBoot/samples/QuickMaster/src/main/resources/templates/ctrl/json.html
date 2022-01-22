@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="main">
+<input id="btn" type="button" value="送信">
+<div id="result"></div>
+<script>
+let btn = document.getElementById('btn');
+btn.addEventListener('click', function(e) {
+    fetch('json', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+         },
+          body: `{
+              "isbn": "978-4-7741-8411-1",
+              "title": "JavaScript本格入門",
+              "price": "2980",
+              "publisher": "技術評論社",
+              "published": "2016-09-30"
+         }`
+     }).then(function(response) {
+         return response.text();
+     }).then(function(txt) {
+         document.getElementById('result').textContent = txt;
+     });
+});
+</script>
+</div>
+</html>

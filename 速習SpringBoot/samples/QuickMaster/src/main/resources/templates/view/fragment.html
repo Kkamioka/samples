@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>速習 Spring Boot</title>
+</head>
+<body>
+<div th:insert="~{common/header_footer::header}"></div>
+<!-- <div th:replace="~{common/header_footer::header}"></div> -->
+<!-- <div th:insert="~{common/header}"></div> -->
+<p>[[${msg}]]</p>
+<div th:insert="~{common/header_footer::footer}"></div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="main">
+<form method="post" th:action="@{/crud/save}" th:object="${book}">
+    <ul th:if="${#fields.hasErrors('*')}">
+         <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+    </ul>
+    <div>
+        <label for="isbn">ISBNコード：</label><br>
+        <input type="text" th:field="*{isbn}" th:errorclass="bg-warning">
+        <!-- <input type="text" th:field="${book.isbn}"> -->
+        <!-- <span th:errors="*{isbn}"></span> -->
+         <span th:if="${#fields.hasErrors('isbn')}">*</span>
+    </div>
+    <div>
+        <label for="title">書名：</label><br>
+        <input type="text" th:field="*{title}" th:errorclass="bg-warning">
+        <!-- <span th:errors="*{title}"></span> -->
+        <span th:if="${#fields.hasErrors('title')}">*</span>
+    </div>
+    <div>
+        <label for="price">価格：</label><br>
+        <input type="text" th:field="*{price}" th:errorclass="bg-warning">
+        <!-- <span th:errors="*{price}"></span> -->
+        <span th:if="${#fields.hasErrors('price')}">*</span>
+    </div>
+    <div>
+        <label for="publisher">出版社：</label><br>
+        <input type="text" th:field="*{publisher}" th:errorclass="bg-warning">
+        <!-- <span th:errors="*{publisher}"></span> -->
+        <span th:if="${#fields.hasErrors('publisher')}">*</span>
+    </div>
+    <div>
+        <label for="published">刊行日：</label><br>
+        <input type="text" th:field="*{published}" th:errorclass="bg-warning">
+        <!-- <span th:errors="*{published}"></span> -->
+        <span th:if="${#fields.hasErrors('published')}">*</span>
+    </div>
+    <div>
+         <label for="attach">付録：</label><br>
+         <select th:field="*{attach}" th:errorclass="bg-warning">
+              <option value="">なし</option>
+              <option value="cd">CD</option>
+              <option value="dvd">DVD</option>
+              <option value="dl">ダウンロード</option>
+         </select>
+         <!-- <span th:errors="*{attach}"></span> -->
+         <span th:if="${#fields.hasErrors('attach')}">*</span>
+    </div> 
+    <input type="submit" value="保存">
+</form>
+</div>
+</html>

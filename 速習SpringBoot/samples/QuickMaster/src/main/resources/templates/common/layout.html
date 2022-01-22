@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${title} ?: _">速習 Spring Boot</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<th:block th:replace="__${lib}__ ?: _"></th:block>
+</head>
+
+<body>
+<div id="header">
+    <img src="https://wings.msn.to/image/wings.jpg" title="ロゴ" >
+    <hr>
+</div>
+<div id="main" th:include="__${main}__">
+</div>
+<div id="footer">
+    <hr>
+    <p>Copyright(c) 2020, WINGS Project, All Right Reserved.</p>
+</div>
+</body>
+</html>

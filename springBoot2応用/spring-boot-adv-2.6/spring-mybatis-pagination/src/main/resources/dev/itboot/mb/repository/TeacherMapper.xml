@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dev.itboot.mb.repository.TeacherMapper">
+
+  <!-- COUNTを追加 -->
+  <select id="count" resultType="Long">
+    SELECT COUNT(*) FROM teacher
+  </select>
+
+  <!-- selectAllは、そのままにします (RowBoundsの追加は不要です) -->
+  <select id="selectAll" resultType="Teacher">
+    SELECT * FROM teacher
+  </select>
+
+  <select id="selectByPrimaryKey" resultType="Teacher">
+    SELECT * FROM teacher
+    WHERE id = #{id}
+  </select>
+
+  <insert id="insert">
+    INSERT INTO teacher(user_name, email)
+    VALUES(#{userName}, #{email})
+  </insert>
+
+  <update id="updateByPrimaryKey">
+    UPDATE teacher
+    SET user_name = #{userName}, email = #{email}
+    WHERE id = #{id}
+  </update>
+
+  <delete id="deleteByPrimaryKey">
+    DELETE FROM teacher
+    WHERE id = #{id}
+  </delete>
+
+</mapper>

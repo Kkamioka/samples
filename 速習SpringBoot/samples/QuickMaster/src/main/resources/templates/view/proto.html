@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="main">
+<ul>
+<!--/*/
+    <li th:each="num : ${#numbers.sequence(1, 5)}">
+        [[${num}]]番目です。
+    </li>
+/*/-->
+<!--/*-->
+    <li>あいうえお</li>
+    <li>かきくけこ</li>
+    <li>さしすせそ</li>
+    <li>たちつてと</li>
+<!--*/-->
+</ul>
+</div>
+</html>

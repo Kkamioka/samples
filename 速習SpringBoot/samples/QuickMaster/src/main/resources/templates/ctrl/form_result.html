@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="main">
+<ul>
+<!--
+    <li>名前： [[${name}]]</li>
+    <li>誕生日： [[${birth}]]</li>
+    <li>メールアドレス： [[${email}]]</li>
+-->
+    <li>名前： [[${memberForm.name}]]</li>
+    <li>誕生日： [[${memberForm.birth}]]</li>
+    <li>メールアドレス： [[${memberForm.email}]]</li> 
+</ul>
+</div>
+</html>

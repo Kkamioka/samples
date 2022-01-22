@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="main">
+<div th:if="${book.empty}">レコードは存在しませんでした。</div>
+<ul  th:if="${book.present}" th:object="${book.get()}">
+    <li>ISBNコード： [[*{isbn}]]</li>
+    <li>書名： [[*{title}]]</li>
+    <li>価格： [[*{price}]]</li>
+    <li>出版社： [[*{publisher}]]</li>
+    <li>刊行日： [[*{published}]]</li>
+    <li>付録： [[*{attach}]]</li>
+</ul>
+</div>
+</html>

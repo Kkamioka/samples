@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>速習 Spring Boot</title>
+</head>
+<body>
+<p th:each="num : ${#numbers.sequence(1, 5)}">
+<!-- <p th:each="num : ${#numbers.sequence(1, 5, 2)}"> -->
+    [[${num}]]番目です。
+</p>
+</body>
+</html>
