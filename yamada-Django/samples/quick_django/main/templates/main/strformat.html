@@ -1,0 +1,22 @@
+{% extends 'main/layout.html' %}
+
+{% block main %}
+<ul>
+  <li>default : {{ data1 | default:'空' }}</li>
+  <li>default_if_none : {{ data1 | default_if_none:'なし' }}</li>
+  <li>linebreaks : {{ data2 | linebreaks }}</li>
+  <li>truncatechars : {{ data2 | truncatechars:'4' }}</li>
+  <li>urlize : {{ data3 | urlize }}</li>
+  <li>join : {{ data4 | join:'&' }}</li>
+  <li>floatformat : {{ data5 | floatformat:'2' }}</li>
+  <li>cut : {{ data3 | cut:'s' }}</li>
+
+  <li>ljust : {{ data3 | ljust:'30' }}</li>
+  <li>center : {{ data6 | center:'30' }}</li> 
+  <li>rjust : {{ data6 | rjust:'30' }}</li> 
+
+  <li>upper : {{ data6 | upper }}</li>
+  <li>capfirst : {{ data6 | capfirst }}</li>
+  <li>title: {{ data6 | title }}</li>
+</ul>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'main/layout.html' %}
+
+{% block main %}
+<ul>
+  {% for field in form %}
+    {% for error in field.errors %}
+      <li>{{ error }}</li>
+    {% endfor %}
+  {% endfor %}
+  {% for error in form.non_field_errors %}
+    <li>{{ error }}</li>
+  {% endfor %}
+</ul>
+<form action="./form_process" method="post" novalidate>
+  {% csrf_token %}
+  <!-- {{ form.as_p }} -->
+
+  <!-- 個別に要素を出力するならば -->
+  <!-- <div class="field">
+    {{ form.isbn.label_tag }}<br />
+    {{ form.isbn }}
+    {{ form.errors.isbn | yesno:'*,' }}
+  </div> -->
+  {% for field in form %}
+    <div class="field">
+      {{ field.label_tag }}<br />
+      {{ field }}
+      {{ field.errors | yesno:'*,' }}
+    </div> 
+  {% endfor %}
+  <input type="submit" value="送信" />
+</form>
+{% endblock %}

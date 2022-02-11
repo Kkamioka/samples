@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<title>速習 Django</title>
+</head>
+<body>
+{% with ''|center:10 as range %}
+  {% for _ in range %}
+    <p>こんにちは、赤ちゃん！</p>
+  {% endfor %}
+{% endwith %}
+</body>
+</html>

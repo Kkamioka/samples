@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+<title>速習 Django</title>
+</head>
+<body>
+{% for message in messages %}
+<div class="alert alert-success">{{message}}</div>
+{% endfor %}
+<table class="table">
+<thead>
+<tr>
+  <th>ISBNコード</th><th>書名</th><th>価格</th><th>出版社</th><th>刊行日</th>
+</tr>
+</thead>
+<tbody>
+{% for b in books %}
+<tr>
+  <td>{{ b.isbn }}</td>
+  <td>{{ b.title }}</td>
+  <td>{{ b.price }}</td>
+  <td>{{ b.publisher }}</td>
+  <td>{{ b.published|date:'DATE_FORMAT' }}</td>
+  <td><a href="{% url 'crud_show' b.id %}">詳細</a>｜
+    <a href="{% url 'crud_edit' b.id %}">編集</a></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</body>
+</html>

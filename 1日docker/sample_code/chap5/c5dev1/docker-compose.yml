@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    ports:
+    - 8081:80
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    image: c5dev1_nginx
+    container_name: c5dev1_nginx
+    ports:
+    - 8080:80

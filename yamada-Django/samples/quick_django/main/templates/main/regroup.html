@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<title>速習 Django</title>
+</head>
+<body>
+{% regroup members by sex as slist %}
+<ul>
+{% for s in slist %}
+  <li>{{ s.grouper }}
+    <ul>
+      {% for m in s.list %}
+        <li>{{ m.name }}（{{ m.birth }}）</li>
+        <!-- <li style="background-color: {% cycle 'skyblue' 'aquamarine' 'lightgreen' 'khaki' %}">
+          {{ m.name }}（{{ m.birth }}）</li> -->
+      {% endfor %}
+    </ul>
+    <!-- {% resetcycle %} -->
+  </li>
+  {% endfor %}
+  </ul>
+</body>
+</html>

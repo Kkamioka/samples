@@ -1,0 +1,77 @@
+- hosts: all
+  remote_user: root
+  tasks:
+
+    - name: Disable firewalld
+      systemd:
+        name: firewalld
+        state: stopped
+        enabled: false
+
+    - name: Change sshd config
+      replace:
+        dest: '/etc/ssh/sshd_config'
+        regexp: '#MaxSessions 10'
+        replace: 'MaxSessions 100'
+      register: sshd_config
+
+    - name: Restart sshd when config changed
+      systemd:
+        name: sshd
+        state: restarted
+        daemon_reload: yes
+        enabled: yes
+      when: sshd_config.changed
+
+    - name: Copy ssh public key
+      copy:
+        src: ./id_rsa.pub
+        dest: /root/.ssh/id_rsa.pub
+        mode: 0644
+
+    - name: Copy ssh private key
+      copy:
+        src: ./id_rsa
+        dest: /root/.ssh/id_rsa
+        mode: 0600
+
+    - name: Add authorized key
+      authorized_key:
+        user: root
+        state: present
+        key: "{{ lookup('file', './id_rsa.pub') }}"
+
+    - name: Install tools
+      yum:
+        name: "unzip,yum-utils,device-mapper-persistent-data,lvm2"
+        state: latest
+
+    - name: Add Docker repo
+      get_url:
+        url: https://download.docker.com/linux/centos/docker-ce.repo
+        dest: /etc/yum.repos.d/docer-ce.repo
+
+    - name: Enable Docker Stable repo
+      ini_file:
+        dest: /etc/yum.repos.d/docer-ce.repo
+        section: "docker-ce-stable"
+        option: enabled
+        value: "1"
+
+    - name: Install docker
+      yum:
+        name: "docker-ce,docker-ce-cli,containerd.io"
+        state: latest
+
+    - name: Download Docker Compose
+      get_url: 
+        url: https://github.com/docker/compose/releases/download/1.24.1/docker-compose-Linux-x86_64
+        dest: /usr/local/bin/docker-compose
+        mode: 0511
+
+    - name: Start/Enable docker
+      systemd:
+        name: docker
+        state: started
+        daemon_reload: no
+        enabled: yes

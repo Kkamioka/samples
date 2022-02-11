@@ -1,0 +1,14 @@
+{% extends 'main/layout.html' %}
+
+{% block main %}
+<form action="{% url 'crud_delete' id %}" method="post" novalidate>
+  {% csrf_token %}
+  {% for field in form %}
+    <div class="pl-2">
+      {{ field.label_tag }}
+      {{ field.value }}
+    </div> 
+  {% endfor %}
+  <input type="submit" value="削除" />
+</form>
+{% endblock %}

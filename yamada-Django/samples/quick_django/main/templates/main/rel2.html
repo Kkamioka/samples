@@ -1,0 +1,23 @@
+{% extends 'main/layout.html' %}
+
+{% block main %}
+<table class="table">
+  <thead>
+  <tr>
+    <th>ISBNコード</th><th>書名</th><th>著者</th></th><th>価格</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for b in books %}
+  <tr>
+    <td>{{ b.isbn }}</td>
+    <td>{{ b.title }}</td>
+    <td>
+    {% for a in b.author_set.all %}{{ a.name }} {% endfor %}
+    </td>
+    <td>{{ b.price }}円</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}  

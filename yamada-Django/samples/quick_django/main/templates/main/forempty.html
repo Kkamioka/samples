@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<title>速習 Django</title>
+</head>
+<body>
+{% for m in members %}
+  <li>{{ m }}</li>
+{% empty %}
+  <p>データは存在しません。</p>
+{% endfor %}  
+</body>
+</html>    

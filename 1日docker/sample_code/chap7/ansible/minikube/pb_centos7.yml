@@ -1,0 +1,142 @@
+- hosts: all
+  remote_user: root
+  tasks:
+
+    - name: Disable firewalld
+      systemd:
+        name: firewalld
+        state: stopped
+        enabled: false
+
+    - name: Change sshd config
+      replace:
+        dest: '/etc/ssh/sshd_config'
+        regexp: '#MaxSessions 10'
+        replace: 'MaxSessions 100'
+      register: sshd_config
+
+    - name: Restart sshd when config changed
+      systemd:
+        name: sshd
+        state: restarted
+        daemon_reload: yes
+        enabled: yes
+      when: sshd_config.changed
+
+    - name: Copy ssh public key
+      copy:
+        src: ./id_rsa.pub
+        dest: /root/.ssh/id_rsa.pub
+        mode: 0644
+
+    - name: Copy ssh private key
+      copy:
+        src: ./id_rsa
+        dest: /root/.ssh/id_rsa
+        mode: 0600
+
+    - name: Copy shell script
+      copy:
+        src: ./set_secure_context.sh
+        dest: /root/set_secure_context.sh
+        mode: 0755
+
+    - name: Copy shell script
+      copy:
+        src: ./set_insecure_context.sh
+        dest: /root/set_insecure_context.sh
+        mode: 0755
+
+    - name: Add authorized key
+      authorized_key:
+        user: root
+        state: present
+        key: "{{ lookup('file', './id_rsa.pub') }}"
+
+    - name: Install tools
+      yum:
+        name: "yum-utils,device-mapper-persistent-data,lvm2,zip,unzip"
+        state: latest
+
+    - name: Add Docker repo
+      get_url:
+        url: https://download.docker.com/linux/centos/docker-ce.repo
+        dest: /etc/yum.repos.d/docer-ce.repo
+
+    - name: Enable Docker Stable repo
+      ini_file:
+        dest: /etc/yum.repos.d/docer-ce.repo
+        section: "docker-ce-stable"
+        option: enabled
+        value: "1"
+
+    - name: Install docker
+      yum:
+        name: "docker-ce,docker-ce-cli,containerd.io"
+        state: latest
+
+    - name: Download Docker Compose
+      get_url: 
+        url: https://github.com/docker/compose/releases/download/1.24.1/docker-compose-Linux-x86_64
+        dest: /usr/local/bin/docker-compose
+        mode: 0511
+        
+    - name: Start/Enable docker
+      systemd:
+        name: docker
+        state: started
+        daemon_reload: no
+        enabled: yes
+
+    - name: Download Minikube
+      get_url: 
+        url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+        dest: /usr/local/bin/minikube
+        mode: 0511
+
+    - name: Update kernel settings
+      sysctl:
+        name: net.bridge.bridge-nf-call-iptables
+        value: "1"
+        sysctl_set: yes
+        state: present
+        reload: yes
+
+    - name: Check whether kubectl exist or not
+      stat: path=/usr/local/bin/kubectl
+      register: result1
+
+    - name: Install Kubernetes if kubectl does not exist
+      when: not result1.stat.exists
+      shell: /usr/local/bin/minikube --vm-driver=none start
+
+    - name: Download kubectl
+      get_url: 
+        url: https://storage.googleapis.com/kubernetes-release/release/v1.16.0/bin/linux/amd64/kubectl
+        dest: /usr/local/bin/kubectl
+        mode: 0511
+
+    - name: Check whether kube-config.zip exit or not
+      stat: path=/root/kube-config.zip
+      register: result2
+
+    - name: Generate kube-config if kube-config.zip does not exist
+      when: not result2.stat.exists
+      shell: /usr/local/bin/kubectl config view --raw > /root/config
+
+    - name: Copy ca.* and client.* to /root/
+      when: not result2.stat.exists
+      shell: cp /root/.minikube/ca.* /root/; cp /root/.minikube/client.* /root/
+
+    - name: Make kube-config.zip
+      archive:
+        path:
+          - /root/config
+          - /root/set_secure_context.sh
+          - /root/set_insecure_context.sh
+          - /root/ca.key
+          - /root/ca.crt
+          - /root/client.key
+          - /root/client.crt
+        dest: /root/kube-config.zip
+        format: zip

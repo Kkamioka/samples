@@ -1,0 +1,5 @@
+version: '3.7'
+services:
+  web: 
+    image: ${DHUB_USER}/c5env:${IMG_VER}
+    container_name: c5env

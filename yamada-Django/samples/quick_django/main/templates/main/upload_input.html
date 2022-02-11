@@ -1,0 +1,10 @@
+{% extends 'main/layout.html' %}
+
+{% block main %}
+<form action="./upload_process" method="post"
+  enctype="multipart/form-data" novalidate>
+  {% csrf_token %}
+  {{ form.body }}
+  <input type="submit" value="送信" />
+</form>
+{% endblock %}

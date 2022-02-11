@@ -1,0 +1,12 @@
+# docker-compose.yml for local
+version: '3.7'
+services:
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: c5redis_app
+    depends_on:
+      - db
+  db:
+    image: redis:5.0.6-alpine3.10

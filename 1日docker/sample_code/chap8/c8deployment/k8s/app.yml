@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+spec:
+  replicas: 5
+  strategy:
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 0%
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      pod: app
+  template:
+    metadata:
+      name: app
+      labels: 
+        pod: app
+    spec:
+      containers:
+      - name: app
+        image: yuichi110/c8dep_app:v2.0
+        ports:
+        - name: http
+          containerPort: 80
+        env:
+        - name: REDIS_HOST
+          value: db
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app
+spec:
+  selector:
+    pod: app
+  ports:
+  - port: 8080
+    targetPort: http
+    nodePort: 30000
+  type: NodePort

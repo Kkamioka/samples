@@ -1,0 +1,12 @@
+{% extends 'main/layout.html' %}
+
+{% block main %}
+<ul>
+  <li>{{ today|date:'Y年m月d日 H:i' }}</li>
+  <li>{{ today|time:'H時i分s秒' }}</li>
+  <li>{{ today|date:'SHORT_DATE_FORMAT' }}</li>
+  <li>{{ today|date:'DATE_FORMAT' }}</li>
+  <li>{{ today|date:'TIME_FORMAT' }}</li>
+</ul>
+{{ data | unordered_list }}
+{% endblock %}

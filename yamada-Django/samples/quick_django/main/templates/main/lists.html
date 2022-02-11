@@ -1,0 +1,11 @@
+{% extends 'main/layout.html' %}
+
+{% block main %}
+<ul>
+  <li>{{ data | length }}</li>
+  <li>{{ data | first }}</li>
+  <li>{{ data | last }}</li>
+  <li>{{ data | random }}</li>
+</ul>
+{{ data | unordered_list }}
+{% endblock %}

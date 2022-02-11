@@ -1,0 +1,10 @@
+{% extends 'main/layout.html' %}
+
+{% block main %}
+<ul>
+  <li>{{ data | slice:':2' }}</li>
+  <li>{{ data | slice:'2' }}</li>
+  <li>{{ data | slice:'2:' }}</li>
+  <li>{{ data | slice:'1:4' }}</li>
+</ul>
+{% endblock %}

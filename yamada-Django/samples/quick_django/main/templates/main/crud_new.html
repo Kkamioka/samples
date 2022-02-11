@@ -1,0 +1,25 @@
+{% extends 'main/layout.html' %}
+
+{% block main %}
+{% for message in messages %}
+  <div class="alert alert-success">{{message}}</div>
+{% endfor %}
+<ul>
+  {% for field in form %}
+    {% for error in field.errors %}
+      <li>{{ error }}</li>
+    {% endfor %}
+  {% endfor %}
+</ul>
+<form action="./crud_create" method="post" novalidate>
+  {% csrf_token %}
+  {% for field in form %}
+    <div class="pl-2">
+      {{ field.label_tag }}<br />
+      {{ field }}
+      {{ field.errors | yesno:'*,' }}
+    </div> 
+  {% endfor %}
+  <input type="submit" value="送信" />
+</form>
+{% endblock %}

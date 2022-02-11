@@ -1,0 +1,27 @@
+{% extends 'main/layout.html' %}
+
+{% block main %}
+<table class="table">
+  <tr>
+    <th>{{ form.isbn.label }}</th>
+    <td>{{ form.cleaned_data.isbn }}</td>
+  </tr>
+  <tr>
+    <th>書名</th>
+    <td>{{ form.cleaned_data.title }}</td>
+  </tr>
+  <tr>
+    <th>価格</th>
+    <td>{{ form.cleaned_data.price }}円</td>
+  </tr>
+  <tr>
+    <th>出版社</th>
+    <td>{{ form.cleaned_data.publisher }}</td>
+    <!-- <td>{{ form.cleaned_data.publisher | join:',' }}</td> -->
+  </tr>
+  <tr>
+    <th>刊行日</th>
+    <td>{{ form.cleaned_data.published }}</td>
+  </tr>
+</table>
+{% endblock %}

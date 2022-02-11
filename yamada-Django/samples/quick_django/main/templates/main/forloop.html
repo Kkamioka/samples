@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+<title>速習 Django</title>
+</head>
+<body>
+<table class="table">
+<thead>
+<tr>
+  <th>値</th>
+  <th>counter</th>
+  <th>counter0</th>
+  <th>rev</th>
+  <th>rev0</th>
+  <th>first</th>
+  <th>last</th>
+</tr>
+</thead>
+<tbody>
+{% for week in weeks %}
+  <tr>
+  <td>{{ week }}</td>
+  <td>{{ forloop.counter }}</td>
+  <td>{{ forloop.counter0 }}</td>
+  <td>{{ forloop.revcounter }}</td>
+  <td>{{ forloop.revcounter0 }}</td>
+  <td>{{ forloop.first }}</td>
+  <td>{{ forloop.last }}</td>
+  </tr>
+{% endfor %}
+</tbody>
+</table>
+</body>
+</html>

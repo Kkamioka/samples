@@ -1,0 +1,80 @@
+- model: main.book
+  pk: 1
+  fields:
+    isbn: 978-4-7981-6364-2
+    title: "\u72EC\u7FD2Python"
+    price: 3300
+    publisher: "\u7FD4\u6CF3\u793E"
+    published: 2020-06-22
+- model: main.book
+  pk: 2
+  fields:
+    isbn: 978-4-7741-9763-0
+    title: "3\u30B9\u30C6\u30C3\u30D7\u3067Python\u5165\u9580"
+    price: 2480
+    publisher: "\u6280\u8853\u8A55\u8AD6\u793E"
+    published: 2018-05-24
+- model: main.book
+  pk: 3
+  fields:
+    isbn: 978-4-7980-5759-0
+    title: "\u306F\u3058\u3081\u3066\u306EAndroid\u30A2\u30D7\u30EA\u958B\u767A"
+    price: 3200
+    publisher: "\u79C0\u548C\u30B7\u30B9\u30C6\u30E0"
+    published: 2019-08-10
+- model: main.book
+  pk: 4
+  fields:
+    isbn: 978-4-8156-0182-9
+    title: "\u3053\u308C\u304B\u3089\u306F\u3058\u3081\u308BVue.js\u5B9F\u8DF5\u5165\u9580"
+    price: 3380
+    publisher: "SB\u30AF\u30EA\u30A8\u30A4\u30C6\u30A3\u30D6"
+    published: 2019-08-13
+- model: main.book
+  pk: 5
+  fields:
+    isbn: 978-4-8222-5391-2
+    title: "iPhone\u30A2\u30D7\u30EA\u8D85\u5165\u9580"
+    price: 2200
+    publisher: "\u65E5\u7D4CBP"
+    published: 2020-02-28
+- model: main.book
+  pk: 6
+  fields:
+    isbn: 978-4-7981-6365-9
+    title: "\u72EC\u7FD2ASP.NET Web\u30D5\u30A9\u30FC\u30E0"
+    price: 3800
+    publisher: "\u7FD4\u6CF3\u793E"
+    published: 2020-02-17
+- model: main.book
+  pk: 7
+  fields:
+    isbn: 978-4-8222-8653-8
+    title: "\u57FA\u790E\u304B\u3089\u3057\u3063\u304B\u308A\u5B66\u3076C#\u306E\u6559\u79D1\u66F8"
+    price: 2900
+    publisher: "\u65E5\u7D4CBP"
+    published: 2019-12-20
+- model: main.book
+  pk: 8
+  fields:
+    isbn: 978-4-8222-5399-8
+    title: "Visual C# 2019\u8D85\u5165\u9580"
+    price: 2000
+    publisher: "\u65E5\u7D4CBP"
+    published: 2019-08-22
+- model: main.book
+  pk: 9
+  fields:
+    isbn: 978-4-7981-5112-0
+    title: "\u72EC\u7FD2Java \u65B0\u7248"
+    price: 2980
+    publisher: "\u7FD4\u6CF3\u793E"
+    published: 2019-05-15
+- model: main.book
+  pk: 10
+  fields:
+    isbn: 978-4-7981-5757-3
+    title: "JavaScript\u9006\u5F15\u304D\u30EC\u30B7\u30D4"
+    price: 2800
+    publisher: "\u7FD4\u6CF3\u793E"
+    published: 2018-10-15

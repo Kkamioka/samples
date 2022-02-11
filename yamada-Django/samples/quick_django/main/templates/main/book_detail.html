@@ -1,0 +1,27 @@
+{% extends 'main/layout.html' %}
+
+{% block main %}
+<table class="table">
+<tr>
+  <th>ISBNコード</th>
+  <td>{{ book.isbn }}</td>
+</tr>
+<tr>
+  <th>書名</th>
+  <td>{{ book.title }}</td>
+</tr>
+<tr>
+  <th>価格</th>
+  <td>{{ book.price }}</td>
+</tr>
+<tr>
+  <th>出版社</th>
+  <td>{{ book.publisher }}</td>
+</tr>
+<tr>
+  <th>刊行日</th>
+  <td>{{ book.published|date:'DATE_FORMAT' }}</td>
+</tr>
+</table>
+<td>{{ data | unordered_list }}</td>
+{% endblock %}
